@@ -1,3 +1,4 @@
+import 'package:coretec/Pages/NewAccountPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lottie/lottie.dart';
@@ -77,6 +78,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         child: Column(
                           children: [
                             Container(
+                              margin: const EdgeInsets.all(5),
                               width: size.width * 0.75,
                               height: size.height * 0.07,
                               child: ElevatedButton(
@@ -87,6 +89,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 ),
                                 style: ElevatedButton.styleFrom(
                                     primary: Color.fromARGB(255, 76, 175, 80)),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.all(5),
+                              width: size.width * 0.75,
+                              height: size.height * 0.07,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => NewAccountPage()));
+                                },
+                                child: Text(
+                                  "Crear una Cuenta",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color.fromARGB(255, 255, 179, 0)),
                               ),
                             )
                           ],
