@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "573522215734",
+    "project_id": "coretec-d342e",
+    "storage_bucket": "coretec-d342e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573522215734:android:fb666586fd352cec036997",
+        "android_client_info": {
+          "package_name": "com.example.coretec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573522215734-v0bud7m975olrilbs5qhd36kcnqogigv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coretec",
+            "certificate_hash": "981bb69b1fe214951aefcc4e990ead8fcf03173d"
+          }
+        },
+        {
+          "client_id": "573522215734-6fopcmajqqq79dd4iv320i85oduntkt1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQSPv8Kvy-lPOWXnTe5l3TEy1eNL-lpm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "573522215734-6fopcmajqqq79dd4iv320i85oduntkt1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
