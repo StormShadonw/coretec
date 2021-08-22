@@ -25,8 +25,10 @@ dependencies:
     sdk: flutter
   lottie: ^1.1.0
   firebase_core: ^1.4.0
+  firebase_auth: ^3.0.2
   flutter_facebook_login: ^3.0.0
   google_sign_in: ^5.0.7
+  flutter_svg: ^0.22.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -54,6 +56,9 @@ flutter:
     - Assets/Images/fondo.png
     - Assets/Images/ic_logo.png
     - Assets/Images/enchu.png
+    - Assets/Images/boy.svg
+    - Assets/Images/padlock.svg
+    - Assets/Images/planet-earth.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

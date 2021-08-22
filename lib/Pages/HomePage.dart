@@ -1,3 +1,4 @@
+import 'package:coretec/Pages/LogInPage.dart';
 import 'package:coretec/Pages/NewAccountPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -82,7 +83,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               width: size.width * 0.75,
                               height: size.height * 0.07,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => LoginPage(),
+                                    ),
+                                  );
+                                },
                                 child: Text(
                                   "Iniciar Sesión con CORETEC",
                                   style: TextStyle(fontSize: 18),
