@@ -17,9 +17,11 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> logIn() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: mail.value.text, password: password.value.text);
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: mail.value.text,
+        password: password.value.text,
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -194,7 +196,9 @@ class _LoginPageState extends State<LoginPage> {
                       Container(
                         width: size.width * 0.75,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            logIn();
+                          },
                           child: Text(
                             "Iniciar Sesión",
                             style: TextStyle(fontSize: 18),

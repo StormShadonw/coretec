@@ -1,5 +1,7 @@
+import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewAccountPage extends StatefulWidget {
   const NewAccountPage({Key? key}) : super(key: key);
@@ -14,27 +16,25 @@ class _NewAccountPageState extends State<NewAccountPage> {
   var name = new TextEditingController();
   var lastName = new TextEditingController();
   var age = new TextEditingController();
+  var phoneNumber = new TextEditingController();
   var gender = "Masculino";
   var _form = GlobalKey<FormState>();
   var _showPassword = false;
 
   Future<void> sendForm() async {
     if (_form.currentState!.validate()) {
-      try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: mail.value.text,
-          password: password.value.text,
-        );
-      } on FirebaseAuthException catch (e) {
-        if (e.code == "weak-password") {
-          print("The password provided is too weak.");
-        } else if (e.code == "email-already-in-use") {
-          print("The account already exists for that email.");
-        }
-      } catch (e) {
-        print(e);
-      }
+      Provider.of<AuthProvider>(
+        context,
+        listen: false,
+      ).signUp(
+        eMail: mail.value.text,
+        password: password.value.text,
+        name: name.value.text,
+        lastName: lastName.value.text,
+        phoneNumber: phoneNumber.value.text,
+        photoUrl: "",
+        age: age.value.text,
+      );
     } else {
       print("Wrong");
     }
@@ -274,24 +274,42 @@ class _NewAccountPageState extends State<NewAccountPage> {
                                   ),
                                 )),
                             Container(
-                              // width: size.width * 0.60,
-                              margin: const EdgeInsets.symmetric(vertical: 5),
-                              child: DropdownButton(
-                                value: gender,
-                                items:
-                                    <String>["Masculino", "Femenino"].map((e) {
-                                  return DropdownMenuItem(
-                                    child: Text(e),
-                                    value: e,
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    gender = value as String;
-                                  });
-                                },
-                              ),
-                            ),
+                                width: size.width * 0.60,
+                                margin: const EdgeInsets.all(5),
+                                child: TextFormField(
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Favor digite su numero de telefono.";
+                                    }
+                                    if (value.isEmpty) {
+                                      return "Favor digite su numero de telefono.";
+                                    }
+                                    return null;
+                                  },
+                                  controller: phoneNumber,
+                                  cursorColor: Color.fromARGB(255, 76, 175, 80),
+                                  decoration: InputDecoration(
+                                    hintText: "Ingresa tu numero de telefono.",
+                                    focusColor:
+                                        Color.fromARGB(255, 76, 175, 80),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide: BorderSide(
+                                        style: BorderStyle.solid,
+                                        width: 1.00,
+                                        color: Color.fromARGB(255, 76, 175, 80),
+                                      ),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide: BorderSide(
+                                        style: BorderStyle.solid,
+                                        width: 1.00,
+                                        color: Color.fromARGB(255, 76, 175, 80),
+                                      ),
+                                    ),
+                                  ),
+                                )),
                           ],
                         ),
                       ),

@@ -1,6 +1,8 @@
 import 'package:coretec/Pages/HomePage.dart';
+import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   initFirebase();
@@ -31,13 +33,18 @@ class MyApp extends StatelessWidget {
 
     MaterialColor colorCustom = MaterialColor(0xFF4caf50, color);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: colorCustom,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: colorCustom,
+        ),
+        home: HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }
