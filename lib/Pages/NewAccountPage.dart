@@ -1,10 +1,12 @@
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class NewAccountPage extends StatefulWidget {
   const NewAccountPage({Key? key}) : super(key: key);
+  static const routeName = "/new_account_page";
 
   @override
   _NewAccountPageState createState() => _NewAccountPageState();
@@ -35,6 +37,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
         photoUrl: "",
         age: age.value.text,
       );
+      Navigator.of(context).pop();
     } else {
       print("Wrong");
     }
@@ -71,6 +74,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           width: size.width * 0.90,
                           margin: const EdgeInsets.all(5),
                           child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value != null) {
                                 RegExp regExp = new RegExp(
@@ -162,6 +166,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           width: size.width * 0.90,
                           margin: const EdgeInsets.all(5),
                           child: TextFormField(
+                            textCapitalization: TextCapitalization.sentences,
                             validator: (value) {
                               if (value == null) {
                                 return "Favor digite su nombre.";
@@ -198,6 +203,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           width: size.width * 0.90,
                           margin: const EdgeInsets.all(5),
                           child: TextFormField(
+                            textCapitalization: TextCapitalization.sentences,
                             validator: (value) {
                               if (value == null) {
                                 return "Favor digite su apellido.";
@@ -277,6 +283,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                                 width: size.width * 0.60,
                                 margin: const EdgeInsets.all(5),
                                 child: TextFormField(
+                                  keyboardType: TextInputType.phone,
                                   validator: (value) {
                                     if (value == null) {
                                       return "Favor digite su numero de telefono.";

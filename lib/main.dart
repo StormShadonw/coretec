@@ -1,7 +1,11 @@
 import 'package:coretec/Pages/HomePage.dart';
+import 'package:coretec/Pages/LogInPage.dart';
+import 'package:coretec/Pages/NewAccountPage.dart';
+import 'package:coretec/Pages/WastePage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -11,6 +15,8 @@ void main() {
 
 Future<void> initFirebase() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   await Firebase.initializeApp();
 }
 
@@ -38,6 +44,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: MaterialApp(
+        routes: {
+          NewAccountPage.routeName: (ctx) => NewAccountPage(),
+          LoginPage.routeName: (ctx) => LoginPage(),
+          WastePage.routeName: (ctx) => WastePage(),
+        },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(

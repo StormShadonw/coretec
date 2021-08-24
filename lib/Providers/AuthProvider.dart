@@ -5,15 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 
-class AuthProvider extends ChangeNotifier {
-  String _tokenId = "";
-  DateTime _tokenExpiresTime = new DateTime(2021);
-  String _userId = "";
-  late UserCredential _userCredential;
-  // Timer _authTimer = Timer(12, callback);
+class AuthProvider with ChangeNotifier {
+  UserCredential? _userCredential;
 
   bool get isAuth {
-    return _userCredential.user!.uid.isNotEmpty;
+    if (_userCredential != null) {
+      return _userCredential!.user!.uid.isNotEmpty;
+    }
+    return false;
   }
 
   Future<void> signUp({
@@ -26,16 +25,19 @@ class AuthProvider extends ChangeNotifier {
     required age,
   }) async {
     try {
+      print("Hey: $_userCredential");
       _userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: eMail,
         password: password,
       );
-      User user = _userCredential.user as User;
+      print("Hey: $_userCredential");
+      User user = _userCredential!.user as User;
       user.updateDisplayName(name + " " + lastName);
       user.updatePhotoURL(
           "https://firebasestorage.googleapis.com/v0/b/coretec-d342e.appspot.com/o/robot%20usuario.svg?alt=media&token=865f2c59-d56c-43ed-911b-fa62658f63b0");
-      saveUser(_userCredential.user!.uid, name, lastName, age, phoneNumber);
+      saveUser(_userCredential!.user!.uid, name, lastName, age, phoneNumber);
+      notifyListeners();
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
         print("The password provided is too weak.");
@@ -45,6 +47,5 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       print(e);
     }
-    notifyListeners();
   }
 }

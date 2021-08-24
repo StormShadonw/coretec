@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class WastePage extends StatelessWidget {
   const WastePage({Key? key}) : super(key: key);
+  static const routeName = "/waste_page";
 
   @override
   Widget build(BuildContext context) {
