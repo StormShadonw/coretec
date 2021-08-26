@@ -22,10 +22,16 @@ class _NewAccountPageState extends State<NewAccountPage> {
   var gender = "Masculino";
   var _form = GlobalKey<FormState>();
   var _showPassword = false;
+  String _error = "";
+  bool hasError = false;
+  bool _isLoading = false;
 
   Future<void> sendForm() async {
     if (_form.currentState!.validate()) {
-      Provider.of<AuthProvider>(
+      setState(() {
+        _isLoading = true;
+      });
+      String error = await Provider.of<AuthProvider>(
         context,
         listen: false,
       ).signUp(
@@ -37,7 +43,20 @@ class _NewAccountPageState extends State<NewAccountPage> {
         photoUrl: "",
         age: age.value.text,
       );
-      Navigator.of(context).pop();
+      setState(() {
+        _isLoading = false;
+      });
+      if (error == "Registrado") {
+        setState(() {
+          hasError = false;
+        });
+        Navigator.of(context).pop();
+      } else {
+        setState(() {
+          hasError = true;
+          _error = error;
+        });
+      }
     } else {
       print("Wrong");
     }
@@ -320,20 +339,41 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           ],
                         ),
                       ),
-                      Container(
-                        width: size.width * 0.90,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            sendForm();
-                          },
-                          child: Text(
-                            "Registrar Cuenta",
-                            style: TextStyle(fontSize: 16),
+                      if (hasError)
+                        Container(
+                          margin: const EdgeInsets.only(
+                            bottom: 15,
+                            top: 15,
                           ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 76, 175, 80)),
+                          child: Center(
+                            child: Text(
+                              _error,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      _isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Container(
+                              width: size.width * 0.90,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  sendForm();
+                                },
+                                child: Text(
+                                  "Registrar Cuenta",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color.fromARGB(255, 76, 175, 80)),
+                              ),
+                            ),
                     ],
                   )),
             ),

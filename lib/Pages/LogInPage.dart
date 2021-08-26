@@ -1,6 +1,8 @@
+import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,26 +13,39 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _error = "";
+  bool hasError = false;
   var _showPassword = false;
   var mail = new TextEditingController();
   var password = new TextEditingController();
   var _form = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   Future<void> logIn() async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: mail.value.text,
-        password: password.value.text,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+    if (_form.currentState!.validate()) {
+      var error = "";
+      setState(() {
+        _isLoading = true;
+      });
+      error = await Provider.of<AuthProvider>(context, listen: false)
+          .logIn(mail.value.text, password.value.text);
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      if (error == "Logeado") {
+        setState(() {
+          hasError = false;
+        });
+        Navigator.of(context).pop();
+      } else {
+        setState(() {
+          hasError = true;
+          _error = error;
+        });
       }
     }
-    print("Logeado");
   }
 
   @override
@@ -76,6 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                             width: size.width * 0.90,
                             margin: const EdgeInsets.all(5),
                             child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 RegExp regExp = new RegExp(
                                   r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
@@ -194,21 +210,40 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Colors.black87, fontSize: 16),
                             )),
                       ),
-                      Container(
-                        width: size.width * 0.75,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            logIn();
-                          },
-                          child: Text(
-                            "Iniciar Sesión",
-                            style: TextStyle(fontSize: 18),
+                      if (hasError)
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 15),
+                          child: Center(
+                            child: Text(
+                              _error,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 15),
-                              primary: Color.fromARGB(255, 76, 175, 80)),
                         ),
-                      ),
+                      _isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Container(
+                              width: size.width * 0.75,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  logIn();
+                                },
+                                child: Text(
+                                  "Iniciar Sesión",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15),
+                                    primary: Color.fromARGB(255, 76, 175, 80)),
+                              ),
+                            ),
                     ],
                   )),
                 ),
