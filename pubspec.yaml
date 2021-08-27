@@ -32,6 +32,7 @@ dependencies:
   provider: ^6.0.0
   firebase_storage: ^10.0.2
   firebase_database: ^7.2.0
+  flutter_signin_button: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -62,6 +63,7 @@ flutter:
     - Assets/Images/boy.svg
     - Assets/Images/padlock.svg
     - Assets/Images/planet-earth.svg
+    - Assets/Images/googleIcon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

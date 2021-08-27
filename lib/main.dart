@@ -8,15 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  initFirebase();
+void main() async {
+  await initFirebase();
   runApp(MyApp());
 }
 
 Future<void> initFirebase() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
   await Firebase.initializeApp();
 }
 

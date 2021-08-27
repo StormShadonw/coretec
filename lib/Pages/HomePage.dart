@@ -4,6 +4,7 @@ import 'package:coretec/Pages/WastePage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_signin_button/button_list.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -108,6 +109,37 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       style: ElevatedButton.styleFrom(
                                           primary:
                                               Color.fromARGB(255, 76, 175, 80)),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.all(5),
+                                    width: size.width * 0.75,
+                                    height: size.height * 0.07,
+                                    child: ElevatedButton.icon(
+                                      onPressed: () {
+                                        Provider.of<AuthProvider>(
+                                          context,
+                                          listen: false,
+                                        ).signInWithGoogle();
+                                      },
+                                      label: Text(
+                                        "Continuar con Google",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                      icon: Image.asset(
+                                        "Assets/Images/googleIcon.png",
+                                        width: 35,
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          side: BorderSide(
+                                            width: 2,
+                                            color: Colors.blue,
+                                          ),
+                                          primary: Color.fromARGB(
+                                              255, 238, 238, 238)),
                                     ),
                                   ),
                                   Container(
