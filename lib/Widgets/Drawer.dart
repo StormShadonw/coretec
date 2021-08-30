@@ -138,7 +138,7 @@ class DrawerWidget extends StatelessWidget {
                     DrawerItem(
                       image: "settings.svg",
                       title: "Ajustes",
-                      route: AjuestesPage.routeName,
+                      route: AjustesPage.routeName,
                     ),
                     DrawerItem(
                       image: "logout.svg",

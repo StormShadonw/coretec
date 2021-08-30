@@ -1,3 +1,4 @@
+import 'package:coretec/Widgets/LogOutAlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,9 +19,13 @@ class DrawerItem extends StatelessWidget {
         height: 30.0,
       ),
       title: Text(title),
-      onTap: () {
-        Navigator.of(context).pushNamed(route);
-      },
+      onTap: route == "LogOut"
+          ? () {
+              LogOutAlertDialog.showWidgetDialog(context);
+            }
+          : () {
+              Navigator.of(context).pushNamed(route);
+            },
     );
   }
 }

@@ -14,17 +14,6 @@ class ReciclarRaeesPage extends StatelessWidget {
       drawer: DrawerWidget(),
       appBar: AppBar(
         title: Text("CORETEC"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Provider.of<AuthProvider>(
-                context,
-                listen: false,
-              ).logOut();
-            },
-            icon: Icon(Icons.logout),
-          ),
-        ],
       ),
       body: Container(
         child: Center(

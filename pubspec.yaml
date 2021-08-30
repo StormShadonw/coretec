@@ -77,6 +77,14 @@ flutter:
     - Assets/Images/tag.svg
     - Assets/Images/beneficio.png
     - Assets/Images/robot_usuario.svg
+    - Assets/Images/ubicacion.svg
+    - Assets/Images/ewaste.svg
+    - Assets/Images/call.svg
+    - Assets/Images/clock.svg
+    - Assets/Images/gmail.svg
+    - Assets/Images/whatsapp.svg
+    - Assets/Images/miPerfil.svg
+    - Assets/Images/chat.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

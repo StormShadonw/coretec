@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = "/HomePage";
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -42,11 +43,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return auth.isAuth
         ? ReciclarRaeesPage()
         : Scaffold(
-            body:
-                // auth.isAuth
-                //     ? WastePage()
-                //     :
-                Center(
+            body: Center(
               child: _splashScreenFinishAnimation
                   ? Container(
                       width: size.width,

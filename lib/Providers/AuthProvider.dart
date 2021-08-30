@@ -26,6 +26,9 @@ class AuthProvider with ChangeNotifier {
 
   Future<String> signInWithGoogle() async {
     // Trigger the authentication flow
+    // if (GoogleSignIn().currentUser != null) {
+    //   await GoogleSignIn().disconnect();
+    // }
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
@@ -47,6 +50,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> logOut() async {
+    await GoogleSignIn().disconnect();
     await FirebaseAuth.instance.signOut();
     _user = null;
     notifyListeners();
