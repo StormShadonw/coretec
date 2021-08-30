@@ -1,7 +1,14 @@
+import 'package:coretec/Pages/AjustesPage.dart';
+import 'package:coretec/Pages/ContactanosPage.dart';
+import 'package:coretec/Pages/HistorialReciclajePage.dart';
 import 'package:coretec/Pages/HomePage.dart';
 import 'package:coretec/Pages/LogInPage.dart';
 import 'package:coretec/Pages/NewAccountPage.dart';
-import 'package:coretec/Pages/WastePage.dart';
+import 'package:coretec/Pages/PlantasTratamientoPage.dart';
+import 'package:coretec/Pages/PorqueReciclarRaeePage.dart';
+import 'package:coretec/Pages/QueSonLasRaeePage.dart';
+import 'package:coretec/Pages/QuienesSomosPage.dart';
+import 'package:coretec/Pages/ReciclarRaeesPage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +53,14 @@ class MyApp extends StatelessWidget {
         routes: {
           NewAccountPage.routeName: (ctx) => NewAccountPage(),
           LoginPage.routeName: (ctx) => LoginPage(),
-          WastePage.routeName: (ctx) => WastePage(),
+          ReciclarRaeesPage.routeName: (ctx) => ReciclarRaeesPage(),
+          AjuestesPage.routeName: (ctx) => AjuestesPage(),
+          ContactanosPage.routeName: (ctx) => ContactanosPage(),
+          HistorialReciclajePage.routeName: (ctx) => HistorialReciclajePage(),
+          PlantasTratamientoPage.routeName: (ctx) => PlantasTratamientoPage(),
+          PorqueReciclarRaeePage.routeName: (ctx) => PorqueReciclarRaeePage(),
+          QueSonLasRaeePage.routeName: (ctx) => QueSonLasRaeePage(),
+          QuienesSomosPage.routeName: (ctx) => QuienesSomosPage(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

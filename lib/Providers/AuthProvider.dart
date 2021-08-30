@@ -2,15 +2,22 @@ import 'dart:async';
 
 import 'package:coretec/Helpers/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider with ChangeNotifier {
-  UserCredential? _userCredential;
+  User? _user;
+
+  User? get user {
+    if (_user != null) {
+      return _user;
+    }
+    return null;
+  }
 
   bool get isAuth {
     if (FirebaseAuth.instance.currentUser != null) {
+      _user = FirebaseAuth.instance.currentUser;
       return true;
     } else {
       return false;
@@ -32,23 +39,27 @@ class AuthProvider with ChangeNotifier {
     );
 
     // Once signed in, return the UserCredential
-    _userCredential =
+    var _userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
+    _user = _userCredential.user;
+    notifyListeners();
     return "Logeado";
   }
 
   Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
-    _userCredential = null;
+    _user = null;
     notifyListeners();
   }
 
   Future<String> logIn(String mail, String password) async {
     try {
-      _userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      var _userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: mail,
         password: password,
       );
+      _user = _userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return "No hay cuenta registrada con ese correo.";
@@ -57,7 +68,7 @@ class AuthProvider with ChangeNotifier {
       }
     }
     notifyListeners();
-    if (_userCredential != null) {
+    if (_user != null) {
       return "Logeado";
     }
     return "Datos erroneos, favor intentar nuevamente.";
@@ -73,17 +84,16 @@ class AuthProvider with ChangeNotifier {
     required age,
   }) async {
     try {
-      print("Hey: $_userCredential");
-      _userCredential =
+      var _userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: eMail,
         password: password,
       );
-      User user = _userCredential!.user as User;
+      _user = _userCredential.user;
+      User user = _userCredential.user as User;
       user.updateDisplayName(name + " " + lastName);
-      user.updatePhotoURL(
-          "https://firebasestorage.googleapis.com/v0/b/coretec-d342e.appspot.com/o/robot%20usuario.svg?alt=media&token=865f2c59-d56c-43ed-911b-fa62658f63b0");
-      saveUser(_userCredential!.user!.uid, name, lastName, age, phoneNumber);
+      user.updatePhotoURL("imagenLocal");
+      saveUser(_userCredential.user!.uid, name, lastName, age, phoneNumber);
       notifyListeners();
       return "Registrado";
     } on FirebaseAuthException catch (e) {
@@ -95,7 +105,7 @@ class AuthProvider with ChangeNotifier {
     } catch (e) {
       print(e);
     }
-    if (_userCredential == null) {
+    if (_user == null) {
       return "No ha sido posible registrar la cuenta, favor intentar mas tarde.";
     }
     return "Registrado";

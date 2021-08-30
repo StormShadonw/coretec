@@ -1,10 +1,9 @@
 import 'package:coretec/Pages/LogInPage.dart';
 import 'package:coretec/Pages/NewAccountPage.dart';
-import 'package:coretec/Pages/WastePage.dart';
+import 'package:coretec/Pages/ReciclarRaeesPage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_signin_button/button_list.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +40,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     print("Haciendo build: ${auth.isAuth}");
     var size = MediaQuery.of(context).size;
     return auth.isAuth
-        ? WastePage()
+        ? ReciclarRaeesPage()
         : Scaffold(
             body:
                 // auth.isAuth
