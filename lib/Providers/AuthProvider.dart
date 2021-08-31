@@ -45,6 +45,21 @@ class AuthProvider with ChangeNotifier {
     var _userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     _user = _userCredential.user;
+    print(_user);
+
+    isEmailUsed(_user!.email as String);
+
+    saveUser(
+      _user!.uid,
+      _user!.displayName!.split(" ")[0],
+      _user!.displayName!.split(" ").length == 2
+          ? _user!.displayName!.split(" ")[1]
+          : _user!.displayName!.split(" ")[2],
+      "0",
+      _user!.phoneNumber == null ? "null" : _user!.phoneNumber as String,
+      user!.email as String,
+    );
+
     notifyListeners();
     return "Logeado";
   }
@@ -97,7 +112,14 @@ class AuthProvider with ChangeNotifier {
       User user = _userCredential.user as User;
       user.updateDisplayName(name + " " + lastName);
       user.updatePhotoURL("imagenLocal");
-      saveUser(_userCredential.user!.uid, name, lastName, age, phoneNumber);
+      saveUser(
+        _userCredential.user!.uid,
+        name,
+        lastName,
+        age,
+        phoneNumber,
+        user.email as String,
+      );
       notifyListeners();
       return "Registrado";
     } on FirebaseAuthException catch (e) {
