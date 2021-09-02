@@ -19,14 +19,22 @@ DatabaseReference saveUser(String uid, String name, String lastName, String age,
 }
 
 Future<bool> isEmailUsed(String email) async {
-  var users = await databaseReference.child("users/").get();
-  var decodedJson = json.decode(users.value);
-  var user =
-      (decodedJson as List).where((element) => element["email"] == email);
+  var user = await databaseReference.child("users/").once().then((value) {
+    if (value.exists) {
+      var jsondecode = new Map<String, dynamic>.from(value.value);
 
-  print("User value: ${user}");
-  if (user != null) {
-    return true;
-  }
-  return false;
+      if (jsondecode.entries
+              .toList()
+              .where((element) => element.value["email"] == email)
+              .length >
+          0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  });
+  return user;
 }

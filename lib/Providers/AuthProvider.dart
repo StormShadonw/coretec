@@ -47,18 +47,18 @@ class AuthProvider with ChangeNotifier {
     _user = _userCredential.user;
     print(_user);
 
-    isEmailUsed(_user!.email as String);
-
-    saveUser(
-      _user!.uid,
-      _user!.displayName!.split(" ")[0],
-      _user!.displayName!.split(" ").length == 2
-          ? _user!.displayName!.split(" ")[1]
-          : _user!.displayName!.split(" ")[2],
-      "0",
-      _user!.phoneNumber == null ? "null" : _user!.phoneNumber as String,
-      user!.email as String,
-    );
+    if (await isEmailUsed(_user!.email as String) == false) {
+      saveUser(
+        _user!.uid,
+        _user!.displayName!.split(" ")[0],
+        _user!.displayName!.split(" ").length == 2
+            ? _user!.displayName!.split(" ")[1]
+            : _user!.displayName!.split(" ")[2],
+        "0",
+        _user!.phoneNumber == null ? "null" : _user!.phoneNumber as String,
+        user!.email as String,
+      );
+    }
 
     notifyListeners();
     return "Logeado";
