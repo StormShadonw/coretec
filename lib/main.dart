@@ -3,6 +3,7 @@ import 'package:coretec/Pages/ContactanosPage.dart';
 import 'package:coretec/Pages/HistorialReciclajePage.dart';
 import 'package:coretec/Pages/HomePage.dart';
 import 'package:coretec/Pages/LogInPage.dart';
+import 'package:coretec/Pages/MiPerfilPage.dart';
 import 'package:coretec/Pages/NewAccountPage.dart';
 import 'package:coretec/Pages/PlantasTratamientoPage.dart';
 import 'package:coretec/Pages/PorqueReciclarRaeePage.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
           QueSonLasRaeePage.routeName: (ctx) => QueSonLasRaeePage(),
           QuienesSomosPage.routeName: (ctx) => QuienesSomosPage(),
           HomePage.routeName: (ctx) => HomePage(),
+          MiPerfilPage.routeName: (ctx) => MiPerfilPage(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
