@@ -1,7 +1,9 @@
 import 'package:coretec/Pages/MiPerfilPage.dart';
+import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:coretec/Widgets/LogOutAlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class AjustesPage extends StatelessWidget {
   static const routeName = "/AjustesPage";
@@ -32,8 +34,11 @@ class AjustesPage extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () =>
-                  Navigator.of(context).pushNamed(MiPerfilPage.routeName),
+              onTap: () => Navigator.of(context).pushNamed(
+                  MiPerfilPage.routeName,
+                  arguments: Provider.of<AuthProvider>(context, listen: false)
+                      .user!
+                      .uid),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 color: Color.fromARGB(255, 255, 255, 255),

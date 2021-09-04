@@ -1,10 +1,19 @@
-import 'package:coretec/Helpers/database.dart';
+import 'dart:async';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MiPerfilPage extends StatelessWidget {
+class MiPerfilPage extends StatefulWidget {
   static const routeName = "/MiPerfilPage";
+
+  @override
+  _MiPerfilPageState createState() => _MiPerfilPageState();
+}
+
+class _MiPerfilPageState extends State<MiPerfilPage> {
+  var user;
+  var userToShow;
+  bool _isLoading = false;
 
   Widget userData(String label, String value) {
     return Container(
@@ -40,40 +49,70 @@ class MiPerfilPage extends StatelessWidget {
     );
   }
 
-  Future<Map<String, dynamic>> getUserData(String userUid) async {
-    return await getUserByUid(userUid);
+  Future<void> getUserData() async {
+    user = await Provider.of<AuthProvider>(
+      context,
+      listen: true,
+    ).userFromDatabase;
   }
 
-  getData(userUid) {
-    return getUserData(userUid);
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getUserData();
+    setState(() {
+      _isLoading = true;
+    });
+    Timer(
+        Duration(
+          seconds: 3,
+        ), () async {
+      setState(() {
+        userToShow = user;
+        _isLoading = false;
+        print(userToShow["phoneNumber"]);
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    var userUid = Provider.of<AuthProvider>(
-      context,
-      listen: true,
-    ).user!.uid;
-    var user = getData(userUid) as Map<String, dynamic>;
-    print("User final: ${user}");
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Editar información del perfil"),
       ),
-      body: Container(
-        width: size.width,
-        height: size.height,
-        color: Color.fromARGB(255, 255, 255, 255),
-        child: Column(
-          children: [
-            userData("Em@il:", user["email"] as String),
-            userData("Nombre(s):", user["name"]),
-            userData("Apellidos:", user["lastName"] as String),
-            userData("Teléfono fijo:", user["phoneNumber"] as String),
-          ],
-        ),
-      ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              width: size.width,
+              height: size.height,
+              color: Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  userData("Em@il:",
+                      userToShow == null ? "-" : userToShow["email"] as String),
+                  userData("Nombre(s):",
+                      userToShow == null ? "-" : userToShow["name"]),
+                  userData(
+                      "Apellidos:",
+                      userToShow == null
+                          ? "-"
+                          : userToShow["lastName"] as String),
+                  userData(
+                      "Teléfono fijo:",
+                      userToShow == null || userToShow["phoneNumber"] == "null"
+                          ? "-"
+                          : userToShow["phoneNumber"] as String),
+                ],
+              ),
+            ),
     );
   }
 }

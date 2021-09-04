@@ -22,8 +22,8 @@ Future<DataSnapshot> returnTableUsers() async {
   return await databaseReference.child("users/").once();
 }
 
-Map<String, dynamic> getUserByUid(String uid) {
-  var user = returnTableUsers() as DataSnapshot;
+Future<Map<String, dynamic>> getUserByUid(String uid) async {
+  var user = await returnTableUsers();
   var userToReturn;
 
   if (user.exists) {
@@ -32,8 +32,6 @@ Map<String, dynamic> getUserByUid(String uid) {
         .toList()
         .where((element) => element.value["uid"] == uid)
         .first;
-
-    print("UserMapEntry: $userMapEntry");
 
     userToReturn = {
       "email": userMapEntry.value["email"],
@@ -44,7 +42,6 @@ Map<String, dynamic> getUserByUid(String uid) {
       "age": userMapEntry.value["age"],
     };
   }
-  print("User to Return: ${userToReturn}");
   return userToReturn;
 }
 
