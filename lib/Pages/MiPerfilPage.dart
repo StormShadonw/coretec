@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:coretec/Pages/CambiarContrase%C3%B1aPage.dart';
+import 'package:coretec/Pages/EditarMiNombrePage.dart';
+import 'package:coretec/Pages/EditarMiNumeroPage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,9 +14,56 @@ class MiPerfilPage extends StatefulWidget {
 }
 
 class _MiPerfilPageState extends State<MiPerfilPage> {
-  var user;
   var userToShow;
   bool _isLoading = false;
+
+  Widget editInfo(
+      {required String label,
+      required String icon,
+      required String route,
+      required Size size}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(route);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: size.width * 0.20,
+                  child: Text("$icon"),
+                ),
+                Container(
+                  width: size.width * 0.80,
+                  child: Text(
+                    "$label",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              child: Divider(
+                thickness: 2,
+              ),
+            ),
+          ],
+        ),
+        width: size.width,
+        // height: 75,
+      ),
+    );
+  }
 
   Widget userData(String label, String value) {
     return Container(
@@ -49,33 +99,20 @@ class _MiPerfilPageState extends State<MiPerfilPage> {
     );
   }
 
-  Future<void> getUserData() async {
-    user = await Provider.of<AuthProvider>(
-      context,
-      listen: true,
-    ).userFromDatabase;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    getUserData();
     setState(() {
       _isLoading = true;
     });
-    Timer(
-        Duration(
-          seconds: 3,
-        ), () async {
+
+    Provider.of<AuthProvider>(
+      context,
+      listen: true,
+    ).userFromDatabase.then((value) {
       setState(() {
-        userToShow = user;
+        userToShow = value;
         _isLoading = false;
-        print(userToShow["phoneNumber"]);
       });
     });
   }
@@ -96,6 +133,27 @@ class _MiPerfilPageState extends State<MiPerfilPage> {
               color: Color.fromARGB(255, 255, 255, 255),
               child: Column(
                 children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 245, 245, 245),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 3),
+                              color: Colors.black12,
+                              spreadRadius: 1,
+                              blurRadius: 2)
+                        ]),
+                    width: size.width,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      "Mis datos:",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   userData("Em@il:",
                       userToShow == null ? "-" : userToShow["email"] as String),
                   userData("Nombre(s):",
@@ -110,6 +168,46 @@ class _MiPerfilPageState extends State<MiPerfilPage> {
                       userToShow == null || userToShow["phoneNumber"] == "null"
                           ? "-"
                           : userToShow["phoneNumber"] as String),
+                  Divider(
+                    thickness: 2,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 245, 245, 245),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 3),
+                              color: Colors.black12,
+                              spreadRadius: 1,
+                              blurRadius: 2)
+                        ]),
+                    width: size.width,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      "Opciones:",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  editInfo(
+                      label: "Editar mi nombre",
+                      icon: "Some Icon",
+                      route: EditarMiNombrePage.routeName,
+                      size: size),
+                  editInfo(
+                      label: "Editar mi teléfono",
+                      icon: "Some Icon",
+                      route: EditarMiNumeroPage.routeName,
+                      size: size),
+                  editInfo(
+                      label: "Cambiar mi contraseña",
+                      icon: "Some Icon",
+                      route: CambiarContraseniaPage.routeName,
+                      size: size),
                 ],
               ),
             ),

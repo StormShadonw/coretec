@@ -1,5 +1,8 @@
 import 'package:coretec/Pages/AjustesPage.dart';
+import 'package:coretec/Pages/CambiarContrase%C3%B1aPage.dart';
 import 'package:coretec/Pages/ContactanosPage.dart';
+import 'package:coretec/Pages/EditarMiNombrePage.dart';
+import 'package:coretec/Pages/EditarMiNumeroPage.dart';
 import 'package:coretec/Pages/HistorialReciclajePage.dart';
 import 'package:coretec/Pages/HomePage.dart';
 import 'package:coretec/Pages/LogInPage.dart';
@@ -64,6 +67,9 @@ class MyApp extends StatelessWidget {
           QuienesSomosPage.routeName: (ctx) => QuienesSomosPage(),
           HomePage.routeName: (ctx) => HomePage(),
           MiPerfilPage.routeName: (ctx) => MiPerfilPage(),
+          EditarMiNombrePage.routeName: (ctx) => EditarMiNombrePage(),
+          EditarMiNumeroPage.routeName: (ctx) => EditarMiNumeroPage(),
+          CambiarContraseniaPage.routeName: (ctx) => CambiarContraseniaPage(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

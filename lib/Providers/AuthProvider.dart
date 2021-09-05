@@ -7,7 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider with ChangeNotifier {
   User? _user;
-  get userFromDatabase async {
+  Future<dynamic> get userFromDatabase async {
     return await getUserByUid(_user!.uid);
   }
 
