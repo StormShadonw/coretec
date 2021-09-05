@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:coretec/Helpers/database.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,15 @@ class _EditarMiNombrePageState extends State<EditarMiNombrePage> {
         });
       });
       _isLoaded = true;
+    }
+  }
+
+  void sendForm() {
+    if (_form.currentState!.validate()) {
+      var userToUpdate = userToShow;
+      userToUpdate["name"] = name.value.text;
+      userToUpdate["lastName"] = lastName.value.text;
+      updateUser(userToUpdate);
     }
   }
 
@@ -103,14 +113,16 @@ class _EditarMiNombrePageState extends State<EditarMiNombrePage> {
                                   ),
                                   Container(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      userToShow["name"],
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black54,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return "Favor proveer un nombre.";
+                                        }
+                                        if (value.isEmpty) {
+                                          return "Favor proveer un nombre.";
+                                        }
+                                      },
+                                      controller: name,
                                     ),
                                   ),
                                 ],
@@ -135,29 +147,71 @@ class _EditarMiNombrePageState extends State<EditarMiNombrePage> {
                                     ),
                                   ),
                                   Container(
-                                      padding: const EdgeInsets.only(right: 10),
-                                      width: size.width * 0.90,
-                                      margin: const EdgeInsets.only(
-                                          left: 10, bottom: 10),
-                                      alignment: Alignment.centerLeft,
-                                      child: TextFormField(
-                                        validator: (value) {
-                                          if (value == null) {
-                                            return "Favor proveer un apellido.";
-                                          }
-                                          if (value.isEmpty) {
-                                            return "Favor proveer un apellido.";
-                                          }
-                                        },
-                                        controller: lastName,
-                                      )),
+                                    padding: const EdgeInsets.only(right: 10),
+                                    width: size.width * 0.90,
+                                    margin: const EdgeInsets.only(
+                                        left: 10, bottom: 10),
+                                    alignment: Alignment.centerLeft,
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return "Favor proveer un apellido.";
+                                        }
+                                        if (value.isEmpty) {
+                                          return "Favor proveer un apellido.";
+                                        }
+                                      },
+                                      controller: lastName,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(),
+                      Container(
+                        width: size.width * 0.90,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              width: size.width * 0.35,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15, horizontal: 20)),
+                                  onPressed: () {
+                                    sendForm();
+                                  },
+                                  child: Text(
+                                    "Guardar",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                            ),
+                            Container(
+                              width: size.width * 0.35,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15, horizontal: 20)),
+                                  onPressed: () {
+                                    Navigator.of(context).pop(context);
+                                  },
+                                  child: Text(
+                                    "Cancelar",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),

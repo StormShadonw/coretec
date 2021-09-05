@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:coretec/Pages/CambiarContrase%C3%B1aPage.dart';
 import 'package:coretec/Pages/EditarMiNombrePage.dart';
 import 'package:coretec/Pages/EditarMiNumeroPage.dart';
