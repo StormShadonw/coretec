@@ -22,6 +22,11 @@ Future<DataSnapshot> returnTableUsers() async {
   return await databaseReference.child("users/").once();
 }
 
+Future<Map<String, dynamic>> updateUser(Map<String, dynamic> user) {
+  databaseReference.child("users/").child(user["uid"]).set(user);
+  return getUserByUid(user["uid"]);
+}
+
 Future<Map<String, dynamic>> getUserByUid(String uid) async {
   var user = await returnTableUsers();
   var userToReturn;
