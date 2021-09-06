@@ -23,7 +23,8 @@ Future<DataSnapshot> returnTableUsers() async {
 }
 
 Future<Map<String, dynamic>> updateUser(Map<String, dynamic> user) {
-  databaseReference.child("users/").child(user["uid"]).set(user);
+  print(user);
+  databaseReference.child("users/").child(user["id"]).update(user);
   return getUserByUid(user["uid"]);
 }
 
@@ -45,6 +46,7 @@ Future<Map<String, dynamic>> getUserByUid(String uid) async {
       "phoneNumber": userMapEntry.value["phoneNumber"],
       "uid": userMapEntry.value["uid"],
       "age": userMapEntry.value["age"],
+      "id": userMapEntry.key
     };
   }
   return userToReturn;

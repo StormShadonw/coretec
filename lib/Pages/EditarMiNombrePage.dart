@@ -48,6 +48,7 @@ class _EditarMiNombrePageState extends State<EditarMiNombrePage> {
       userToUpdate["name"] = name.value.text;
       userToUpdate["lastName"] = lastName.value.text;
       updateUser(userToUpdate);
+      Navigator.of(context).pop();
     }
   }
 
