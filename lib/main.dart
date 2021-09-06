@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
           MiPerfilPage.routeName: (ctx) => MiPerfilPage(),
           EditarMiNombrePage.routeName: (ctx) => EditarMiNombrePage(),
           EditarMiNumeroPage.routeName: (ctx) => EditarMiNumeroPage(),
-          CambiarContraseniaPage.routeName: (ctx) => CambiarContraseniaPage(),
+          CambiarContrasenaPage.routeName: (ctx) => CambiarContrasenaPage(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

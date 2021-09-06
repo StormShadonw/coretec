@@ -27,6 +27,16 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  void changePassword(String oldPassword, String newPassword) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final cred = EmailAuthProvider.credential(
+        email: currentUser!.email as String, password: oldPassword);
+
+    currentUser.reauthenticateWithCredential(cred).then((value) {
+      currentUser.updatePassword(newPassword).then((value) {});
+    });
+  }
+
   Future<String> signInWithGoogle() async {
     // Trigger the authentication flow
     // if (GoogleSignIn().currentUser != null) {
@@ -68,10 +78,14 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> logOut() async {
-    await GoogleSignIn().disconnect();
-    await FirebaseAuth.instance.signOut();
-    _user = null;
-    notifyListeners();
+    userFromDatabase.then((value) async {
+      if (int.parse(value["age"]) == 0) {
+        await GoogleSignIn().disconnect();
+      }
+      await FirebaseAuth.instance.signOut();
+      _user = null;
+      notifyListeners();
+    });
   }
 
   Future<String> logIn(String mail, String password) async {

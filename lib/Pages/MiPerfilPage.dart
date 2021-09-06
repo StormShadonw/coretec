@@ -202,11 +202,12 @@ class _MiPerfilPageState extends State<MiPerfilPage> {
                       icon: "Some Icon",
                       route: EditarMiNumeroPage.routeName,
                       size: size),
-                  editInfo(
-                      label: "Cambiar mi contraseña",
-                      icon: "Some Icon",
-                      route: CambiarContraseniaPage.routeName,
-                      size: size),
+                  if (int.parse(userToShow["age"]) > 0)
+                    editInfo(
+                        label: "Cambiar mi contraseña",
+                        icon: "Some Icon",
+                        route: CambiarContrasenaPage.routeName,
+                        size: size),
                 ],
               ),
             ),

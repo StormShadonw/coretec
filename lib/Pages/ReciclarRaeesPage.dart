@@ -4,8 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ReciclarRaeesPage extends StatelessWidget {
-  const ReciclarRaeesPage({Key? key}) : super(key: key);
   static const routeName = "/ReciclarRaeesPage";
+  var objectsToReciclate = [];
+
+  Widget GridChild(String label, String image) {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            child: Image.asset(
+              image,
+              width: 75,
+              height: 75,
+            ),
+          ),
+          Container(
+            color: Color.fromARGB(255, 73, 175, 77),
+            width: 75,
+            height: 55,
+            child: Text(label),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +39,10 @@ class ReciclarRaeesPage extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: Text("First Page"),
+          child: GridView.count(
+            crossAxisCount: 2,
+            children: [],
+          ),
         ),
         width: size.width,
         height: size.height,
