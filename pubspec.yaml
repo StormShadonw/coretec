@@ -85,6 +85,39 @@ flutter:
     - Assets/Images/whatsapp.svg
     - Assets/Images/miPerfil.svg
     - Assets/Images/chat.svg
+    - Assets/Images/Camara de Vigilancia.svg
+    - Assets/Images/Camara Fotografica.svg
+    - Assets/Images/Cargador USB.svg
+    - Assets/Images/Celular.svg
+    - Assets/Images/Consola de Videojuego.svg
+    - Assets/Images/Control Remoto.svg
+    - Assets/Images/CPU.svg
+    - Assets/Images/Disco Duro.svg
+    - Assets/Images/Fuente de Poder.svg
+    - Assets/Images/Hervidor Electrico.svg
+    - Assets/Images/Impresora.svg
+    - Assets/Images/Ipad-Tablet.svg
+    - Assets/Images/Juguete Electronico.svg
+    - Assets/Images/Laptop.svg
+    - Assets/Images/Lavadora.svg
+    - Assets/Images/Licuadora.svg
+    - Assets/Images/Microondas.svg
+    - Assets/Images/Monitor.svg
+    - Assets/Images/Mouse.svg
+    - Assets/Images/Plancha.svg
+    - Assets/Images/Proyector.svg
+    - Assets/Images/Radio.svg
+    - Assets/Images/Reproductor DVD.svg
+    - Assets/Images/Reproductor MP3 MP4.svg
+    - Assets/Images/Reproductor VHS.svg
+    - Assets/Images/Router - Modem.svg
+    - Assets/Images/Scanner.svg
+    - Assets/Images/Tarjeta Electronica.svg
+    - Assets/Images/Teclado.svg
+    - Assets/Images/Telefono.svg
+    - Assets/Images/Televisor - Smart TV.svg
+    - Assets/Images/Unidad de CD.svg
+    - Assets/Images/Ventilador.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

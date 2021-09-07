@@ -1,28 +1,76 @@
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:coretec/Widgets/Drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class ReciclarRaeesPage extends StatelessWidget {
   static const routeName = "/ReciclarRaeesPage";
-  var objectsToReciclate = [];
+  var objectsToReciclate = [
+    "Camara de Vigilancia",
+    "Camara Fotografica",
+    "Cargador USB",
+    "Celular",
+    "Consola de Videojuego",
+    "Control Remoto",
+    "CPU",
+    "Disco Duro",
+    "Fuente de Poder",
+    "Hervidor Electrico",
+    "Impresora",
+    "Ipad-Tablet",
+    "Juguete Electronico",
+    "Laptop",
+    "Lavadora",
+    "Licuadora",
+    "Microondas",
+    "Monitor ",
+    "Mouse",
+    "Plancha",
+    "Proyector",
+    "Radio",
+    "Reproductor DVD",
+    "Reproductor MP3 MP4",
+    "Reproductor VHS",
+    "Router - Modem",
+    "Scanner",
+    "Tarjeta Electronica",
+    "Teclado",
+    "Telefono",
+    "Televisor - Smart TV",
+    "Unidad de CD",
+    "Ventilador",
+  ];
 
-  Widget GridChild(String label, String image) {
+  Widget gridChild(String label, String image, Size size) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            child: Image.asset(
+            color: Color.fromARGB(255, 253, 255, 253),
+            width: size.width * 0.45,
+            height: size.height * 0.20,
+            padding: const EdgeInsets.all(25),
+            child: SvgPicture.asset(
               image,
-              width: 75,
-              height: 75,
+              width: size.width * 0.15,
             ),
           ),
           Container(
+            alignment: Alignment.center,
+            width: size.width * 0.45,
+            height: size.height * 0.15,
             color: Color.fromARGB(255, 73, 175, 77),
-            width: 75,
-            height: 55,
-            child: Text(label),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
@@ -38,10 +86,19 @@ class ReciclarRaeesPage extends StatelessWidget {
         title: Text("CORETEC"),
       ),
       body: Container(
+        padding: const EdgeInsets.only(top: 15),
+        color: Color.fromARGB(255, 235, 238, 235),
         child: Center(
           child: GridView.count(
             crossAxisCount: 2,
-            children: [],
+            // crossAxisSpacing: 5,
+            // mainAxisSpacing: 5,
+            childAspectRatio: 2 / 3,
+            children: [
+              ...objectsToReciclate.map((e) {
+                return gridChild(e, "Assets/Images/$e.svg", size);
+              }).toList(),
+            ],
           ),
         ),
         width: size.width,
