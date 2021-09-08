@@ -1,4 +1,5 @@
 import 'package:coretec/Providers/AuthProvider.dart';
+import 'package:coretec/Widgets/AddNewModal.dart';
 import 'package:coretec/Widgets/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,37 +43,47 @@ class ReciclarRaeesPage extends StatelessWidget {
     "Ventilador",
   ];
 
-  Widget gridChild(String label, String image, Size size) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            color: Color.fromARGB(255, 253, 255, 253),
-            width: size.width * 0.45,
-            height: size.height * 0.20,
-            padding: const EdgeInsets.all(25),
-            child: SvgPicture.asset(
-              image,
-              width: size.width * 0.15,
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: size.width * 0.45,
-            height: size.height * 0.15,
-            color: Color.fromARGB(255, 73, 175, 77),
-            child: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: Colors.white,
+  Widget gridChild(
+      String label, String image, Size size, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return AddNewModal();
+            });
+      },
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              color: Color.fromARGB(255, 253, 255, 253),
+              width: size.width * 0.45,
+              height: size.height * 0.20,
+              padding: const EdgeInsets.all(25),
+              child: SvgPicture.asset(
+                image,
+                width: size.width * 0.15,
               ),
             ),
-          ),
-        ],
+            Container(
+              alignment: Alignment.center,
+              width: size.width * 0.45,
+              height: size.height * 0.15,
+              color: Color.fromARGB(255, 73, 175, 77),
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -83,6 +94,12 @@ class ReciclarRaeesPage extends StatelessWidget {
     return Scaffold(
       drawer: DrawerWidget(),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          ),
+        ],
         title: Text("CORETEC"),
       ),
       body: Container(
@@ -96,7 +113,7 @@ class ReciclarRaeesPage extends StatelessWidget {
             childAspectRatio: 2 / 3,
             children: [
               ...objectsToReciclate.map((e) {
-                return gridChild(e, "Assets/Images/$e.svg", size);
+                return gridChild(e, "Assets/Images/$e.svg", size, context);
               }).toList(),
             ],
           ),
