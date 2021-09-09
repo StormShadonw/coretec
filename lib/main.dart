@@ -14,6 +14,7 @@ import 'package:coretec/Pages/QueSonLasRaeePage.dart';
 import 'package:coretec/Pages/QuienesSomosPage.dart';
 import 'package:coretec/Pages/ReciclarRaeesPage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
+import 'package:coretec/Providers/CartProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MaterialApp(
         routes: {

@@ -4,6 +4,36 @@ import 'package:firebase_database/firebase_database.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
 
+DatabaseReference saveItemCart(
+    String name, String brand, int cantity, String itemType, String uid) {
+  var id = databaseReference.child("cartItems/").push();
+  print("id: ${id.key}");
+  id.set({
+    "uid": uid,
+    "name": name,
+    "brand": brand,
+    "cantity": cantity,
+    "itemType": itemType,
+    "id": id.key,
+  });
+  return id;
+}
+
+Future<List<MapEntry<String, dynamic>>> getItemsCart(String uid) async {
+  var user = await databaseReference.child("cartItems/").once();
+  var userToReturn;
+
+  if (user.exists) {
+    var jsondecode = new Map<String, dynamic>.from(user.value);
+    var userMapEntry = jsondecode.entries
+        .toList()
+        .where((element) => element.value["uid"] == uid)
+        .toList();
+    return userMapEntry;
+  }
+  return [];
+}
+
 DatabaseReference saveUser(String uid, String name, String lastName, String age,
     String phoneNumber, String email) {
   var id = databaseReference.child("users/").push();

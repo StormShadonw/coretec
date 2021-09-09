@@ -48,9 +48,12 @@ class ReciclarRaeesPage extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
+            isScrollControlled: true,
             context: context,
             builder: (context) {
-              return AddNewModal();
+              return AddNewModal(
+                itemType: label,
+              );
             });
       },
       child: Container(
