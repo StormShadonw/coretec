@@ -1,3 +1,4 @@
+import 'package:coretec/Pages/ReciclarRaeesPage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:coretec/Providers/CartProvider.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,8 @@ class _AddNewModalState extends State<AddNewModal> {
         setState(() {
           _isLoading = false;
         });
-        Navigator.of(context).pop();
+        Navigator.pushNamedAndRemoveUntil(
+            context, ReciclarRaeesPage.routeName, (route) => false);
       }
     }
   }
@@ -100,9 +102,11 @@ class _AddNewModalState extends State<AddNewModal> {
                                       children: [
                                         InkWell(
                                           onTap: () {
-                                            setState(() {
-                                              cantity--;
-                                            });
+                                            if (cantity > 0) {
+                                              setState(() {
+                                                cantity--;
+                                              });
+                                            }
                                           },
                                           child: Container(
                                             margin: const EdgeInsets.all(5),

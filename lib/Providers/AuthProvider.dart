@@ -58,7 +58,6 @@ class AuthProvider with ChangeNotifier {
     var _userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     _user = _userCredential.user;
-    print(_user);
 
     if (await isEmailUsed(_user!.email as String) == false) {
       saveUser(

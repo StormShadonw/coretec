@@ -85,39 +85,39 @@ flutter:
     - Assets/Images/whatsapp.svg
     - Assets/Images/miPerfil.svg
     - Assets/Images/chat.svg
-    - Assets/Images/Camara de Vigilancia.svg
-    - Assets/Images/Camara Fotografica.svg
-    - Assets/Images/Cargador USB.svg
-    - Assets/Images/Celular.svg
-    - Assets/Images/Consola de Videojuego.svg
-    - Assets/Images/Control Remoto.svg
-    - Assets/Images/CPU.svg
-    - Assets/Images/Disco Duro.svg
-    - Assets/Images/Fuente de Poder.svg
-    - Assets/Images/Hervidor Electrico.svg
-    - Assets/Images/Impresora.svg
-    - Assets/Images/Ipad-Tablet.svg
-    - Assets/Images/Juguete Electronico.svg
-    - Assets/Images/Laptop.svg
-    - Assets/Images/Lavadora.svg
-    - Assets/Images/Licuadora.svg
-    - Assets/Images/Microondas.svg
-    - Assets/Images/Monitor.svg
-    - Assets/Images/Mouse.svg
-    - Assets/Images/Plancha.svg
-    - Assets/Images/Proyector.svg
-    - Assets/Images/Radio.svg
-    - Assets/Images/Reproductor DVD.svg
-    - Assets/Images/Reproductor MP3 MP4.svg
-    - Assets/Images/Reproductor VHS.svg
-    - Assets/Images/Router - Modem.svg
-    - Assets/Images/Scanner.svg
-    - Assets/Images/Tarjeta Electronica.svg
-    - Assets/Images/Teclado.svg
-    - Assets/Images/Telefono.svg
-    - Assets/Images/Televisor - Smart TV.svg
-    - Assets/Images/Unidad de CD.svg
-    - Assets/Images/Ventilador.svg
+    - Assets/Images/Camara de Vigilancia.png
+    - Assets/Images/Camara Fotografica.png
+    - Assets/Images/Cargador USB.png
+    - Assets/Images/Celular.png
+    - Assets/Images/Consola de Videojuego.png
+    - Assets/Images/Control Remoto.png
+    - Assets/Images/CPU.png
+    - Assets/Images/Disco Duro.png
+    - Assets/Images/Fuente de Poder.png
+    - Assets/Images/Hervidor Electrico.png
+    - Assets/Images/Impresora.png
+    - Assets/Images/Ipad-Tablet.png
+    - Assets/Images/Juguete Electronico.png
+    - Assets/Images/Laptop.png
+    - Assets/Images/Lavadora.png
+    - Assets/Images/Licuadora.png
+    - Assets/Images/Microondas.png
+    - Assets/Images/Monitor.png
+    - Assets/Images/Mouse.png
+    - Assets/Images/Plancha.png
+    - Assets/Images/Proyector.png
+    - Assets/Images/Radio.png
+    - Assets/Images/Reproductor DVD.png
+    - Assets/Images/Reproductor MP3 MP4.png
+    - Assets/Images/Reproductor VHS.png
+    - Assets/Images/Router - Modem.png
+    - Assets/Images/Scanner.png
+    - Assets/Images/Tarjeta Electronica.png
+    - Assets/Images/Teclado.png
+    - Assets/Images/Telefono.png
+    - Assets/Images/Televisor - Smart TV.png
+    - Assets/Images/Unidad de CD.png
+    - Assets/Images/Ventilador.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,6 +1,8 @@
 import 'package:coretec/Providers/AuthProvider.dart';
+import 'package:coretec/Providers/CartProvider.dart';
 import 'package:coretec/Widgets/AddNewModal.dart';
 import 'package:coretec/Widgets/Drawer.dart';
+import 'package:coretec/Widgets/cartWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +27,7 @@ class ReciclarRaeesPage extends StatelessWidget {
     "Lavadora",
     "Licuadora",
     "Microondas",
-    "Monitor ",
+    "Monitor",
     "Mouse",
     "Plancha",
     "Proyector",
@@ -41,7 +43,7 @@ class ReciclarRaeesPage extends StatelessWidget {
     "Televisor - Smart TV",
     "Unidad de CD",
     "Ventilador",
-  ];
+  ]..sort();
 
   Widget gridChild(
       String label, String image, Size size, BuildContext context) {
@@ -65,7 +67,7 @@ class ReciclarRaeesPage extends StatelessWidget {
               width: size.width * 0.45,
               height: size.height * 0.20,
               padding: const EdgeInsets.all(25),
-              child: SvgPicture.asset(
+              child: Image.asset(
                 image,
                 width: size.width * 0.15,
               ),
@@ -98,6 +100,7 @@ class ReciclarRaeesPage extends StatelessWidget {
       drawer: DrawerWidget(),
       appBar: AppBar(
         actions: [
+          CartWidget(),
           IconButton(
             onPressed: () {},
             icon: Icon(Icons.search),
@@ -116,7 +119,7 @@ class ReciclarRaeesPage extends StatelessWidget {
             childAspectRatio: 2 / 3,
             children: [
               ...objectsToReciclate.map((e) {
-                return gridChild(e, "Assets/Images/$e.svg", size, context);
+                return gridChild(e, "Assets/Images/$e.png", size, context);
               }).toList(),
             ],
           ),
