@@ -56,10 +56,12 @@ class _ListarReciclajesPageState extends State<ListarReciclajesPage> {
           : Container(
               padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
               alignment: Alignment.center,
-              child: Column(
-                children: [
-                  ...carts.map((e) => CartItemWidget(cartItem: e)).toList()
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ...carts.map((e) => CartItemWidget(cartItem: e)).toList()
+                  ],
+                ),
               ),
             ),
     );

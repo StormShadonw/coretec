@@ -1,5 +1,4 @@
 import 'package:coretec/Helpers/database.dart';
-import 'package:coretec/Models/CartItem.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider with ChangeNotifier {
@@ -14,8 +13,8 @@ class CartProvider with ChangeNotifier {
 
   loadAllItemsCart(String uid) async {
     var records = await getItemsCart(uid);
-    var recordsToList = [];
-    var index = 0;
+    // var recordsToList = [];
+    // var index = 0;
     for (var c = 0; c < records.length; c++) {
       _cartItems.add({
         "name": records[c].value["name"],

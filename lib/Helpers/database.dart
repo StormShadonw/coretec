@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_database/firebase_database.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
@@ -21,7 +19,7 @@ DatabaseReference saveItemCart(
 
 Future<List<MapEntry<String, dynamic>>> getItemsCart(String uid) async {
   var user = await databaseReference.child("cartItems/").once();
-  var userToReturn;
+  // var userToReturn;
 
   if (user.exists) {
     var jsondecode = new Map<String, dynamic>.from(user.value);

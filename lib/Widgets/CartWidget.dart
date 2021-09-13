@@ -59,7 +59,34 @@ class _CartWidgetState extends State<CartWidget> {
             onTap: () =>
                 Navigator.of(context).pushNamed(ListarReciclajesPage.routeName),
             child: Container(
-              child: Text("${cantityInCart}"),
+              width: 55,
+              height: 55,
+              alignment: Alignment.center,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    "Assets/Images/Caja.png",
+                    width: 45,
+                  ),
+                  Positioned(
+                    right: 1,
+                    top: 1,
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        "$cantityInCart",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.purpleAccent,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
   }

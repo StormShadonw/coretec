@@ -1,11 +1,7 @@
-import 'package:coretec/Providers/AuthProvider.dart';
-import 'package:coretec/Providers/CartProvider.dart';
 import 'package:coretec/Widgets/AddNewModal.dart';
 import 'package:coretec/Widgets/Drawer.dart';
 import 'package:coretec/Widgets/cartWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
 class ReciclarRaeesPage extends StatelessWidget {
   static const routeName = "/ReciclarRaeesPage";

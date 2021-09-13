@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:coretec/Helpers/database.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

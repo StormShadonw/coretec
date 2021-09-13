@@ -118,6 +118,8 @@ flutter:
     - Assets/Images/Televisor - Smart TV.png
     - Assets/Images/Unidad de CD.png
     - Assets/Images/Ventilador.png
+    - Assets/Images/Caja.png
+    - Assets/Images/caja2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
