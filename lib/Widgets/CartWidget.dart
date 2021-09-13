@@ -1,3 +1,4 @@
+import 'package:coretec/Pages/ListarReciclajesPage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:coretec/Providers/CartProvider.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +55,12 @@ class _CartWidgetState extends State<CartWidget> {
               color: Colors.yellowAccent,
             ),
           )
-        : Container(
-            child: Text("${cantityInCart}"),
+        : GestureDetector(
+            onTap: () =>
+                Navigator.of(context).pushNamed(ListarReciclajesPage.routeName),
+            child: Container(
+              child: Text("${cantityInCart}"),
+            ),
           );
   }
 }
