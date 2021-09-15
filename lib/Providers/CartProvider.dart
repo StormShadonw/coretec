@@ -11,6 +11,13 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
+  updateCartItem(Map<String, dynamic> cartItem) {
+    updateCartItemDatabase(cartItem);
+    // _cartItems.clear();
+    // _cartItems = await cartItems(cartItem["uid"]);
+    notifyListeners();
+  }
+
   loadAllItemsCart(String uid) async {
     var records = await getItemsCart(uid);
     // var recordsToList = [];

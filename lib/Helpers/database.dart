@@ -57,6 +57,11 @@ Future<Map<String, dynamic>> updateUser(Map<String, dynamic> user) {
   return getUserByUid(user["uid"]);
 }
 
+updateCartItemDatabase(Map<String, dynamic> cartItem) {
+  databaseReference.child("cartItems/").child(cartItem["id"]).update(cartItem);
+  // return getCartItemByUid(cartItem["uid"]);
+}
+
 Future<Map<String, dynamic>> getUserByUid(String uid) async {
   var user = await returnTableUsers();
   var userToReturn;

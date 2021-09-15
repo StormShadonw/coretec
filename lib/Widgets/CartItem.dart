@@ -1,4 +1,7 @@
+import 'package:coretec/Helpers/database.dart';
+import 'package:coretec/Providers/CartProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartItemWidget extends StatefulWidget {
   Map<String, dynamic> cartItem;
@@ -9,10 +12,19 @@ class CartItemWidget extends StatefulWidget {
 }
 
 class _CartItemWidgetState extends State<CartItemWidget> {
+  int cantity = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cantity = widget.cartItem["cantity"] as int;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    int cantity = widget.cartItem["cantity"] as int;
+    // int cantity = widget.cartItem["cantity"] as int;
 
     return Container(
       margin: const EdgeInsets.all(10),
@@ -84,10 +96,15 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         children: [
                           InkWell(
                             onTap: () {
-                              if (cantity > 0) {
+                              if (cantity > 1) {
                                 setState(() {
                                   cantity--;
                                 });
+                                widget.cartItem["cantity"] = cantity;
+                                Provider.of<CartProvider>(
+                                  context,
+                                  listen: false,
+                                ).updateCartItem(widget.cartItem);
                               }
                             },
                             child: Container(
@@ -128,8 +145,16 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                cantity++;
+                                if (cantity < 99) {
+                                  cantity++;
+                                }
                               });
+                              widget.cartItem["cantity"] = cantity;
+                              Provider.of<CartProvider>(
+                                context,
+                                listen: false,
+                              ).updateCartItem(widget.cartItem);
+                              // updateCartItem(widget.cartItem);
                             },
                             child: Container(
                               margin: const EdgeInsets.all(5),
