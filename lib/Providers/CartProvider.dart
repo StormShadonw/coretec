@@ -11,18 +11,15 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
-  int count(String uid) {
-    cartItems(uid).then((value) {
-      var cart;
-      var cantityInCart;
-      cart = value;
-      print("cart: $cart");
-      for (var c = 0; c < cart.length; c++) {
-        cantityInCart += cart[c]["cantity"] as int;
-      }
-      return cantityInCart;
-    });
-    throw Exception();
+  Future<int> count(String uid) async {
+    var cantityInCart = 0;
+    var cartItemsToReturn;
+    cartItemsToReturn = await cartItems(uid);
+    for (var c = 0; c < cartItemsToReturn.length; c++) {
+      cantityInCart += cartItemsToReturn[c]["cantity"] as int;
+    }
+    print("Length: ${cantityInCart}");
+    return cantityInCart;
   }
 
   updateCartItem(Map<String, dynamic> cartItem) {

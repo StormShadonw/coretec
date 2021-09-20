@@ -27,7 +27,6 @@ Future<List<MapEntry<String, dynamic>>> getItemsCart(String uid) async {
         .toList()
         .where((element) => element.value["uid"] == uid)
         .toList();
-    print("User map entry: $userMapEntry");
     return userMapEntry;
   }
   return [];
