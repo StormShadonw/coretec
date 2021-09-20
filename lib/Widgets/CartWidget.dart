@@ -25,24 +25,14 @@ class _CartWidgetState extends State<CartWidget> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<AuthProvider>(
+      user = Provider.of<AuthProvider>(
         context,
         listen: true,
       ).userFromDatabase.then((value) {
         user = value;
-        Provider.of<CartProvider>(
-          context,
-          listen: false,
-        ).cartItems(value["uid"]).then((value) {
-          cart = value;
-          for (var c = 0; c < cart.length; c++) {
-            cantityInCart += cart[c]["cantity"] as int;
-          }
-          setState(() {
-            _isLoading = false;
-          });
+        setState(() {
+          _isLoading = false;
         });
-        _isLoaded = true;
       });
     }
   }
@@ -55,37 +45,39 @@ class _CartWidgetState extends State<CartWidget> {
               color: Colors.yellowAccent,
             ),
           )
-        : GestureDetector(
-            onTap: () =>
-                Navigator.of(context).pushNamed(ListarReciclajesPage.routeName),
-            child: Container(
-              width: 55,
-              height: 55,
-              alignment: Alignment.center,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.asset(
-                    "Assets/Images/Caja.png",
-                    width: 45,
-                  ),
-                  Positioned(
-                    right: 1,
-                    top: 1,
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(5),
-                      child: Text(
-                        "$cantityInCart",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.purpleAccent,
+        : Consumer<CartProvider>(
+            builder: (context, cartProvider, _) => GestureDetector(
+              onTap: () => Navigator.of(context)
+                  .pushNamed(ListarReciclajesPage.routeName),
+              child: Container(
+                width: 55,
+                height: 55,
+                alignment: Alignment.center,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.asset(
+                      "Assets/Images/Caja.png",
+                      width: 45,
+                    ),
+                    Positioned(
+                      right: 1,
+                      top: 1,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(5),
+                        child: Text(
+                          "${cartProvider.count(user["uid"])}",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.purpleAccent,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

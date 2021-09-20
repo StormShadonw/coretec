@@ -11,6 +11,20 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
+  int count(String uid) {
+    cartItems(uid).then((value) {
+      var cart;
+      var cantityInCart;
+      cart = value;
+      print("cart: $cart");
+      for (var c = 0; c < cart.length; c++) {
+        cantityInCart += cart[c]["cantity"] as int;
+      }
+      return cantityInCart;
+    });
+    throw Exception();
+  }
+
   updateCartItem(Map<String, dynamic> cartItem) {
     updateCartItemDatabase(cartItem);
     // _cartItems.clear();
