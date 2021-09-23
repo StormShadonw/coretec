@@ -1,6 +1,7 @@
 import 'package:coretec/Pages/ListarReciclajesPage.dart';
 import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:coretec/Providers/CartProvider.dart';
+import 'package:coretec/Widgets/Test.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,20 @@ class _CartWidgetState extends State<CartWidget> {
         listen: true,
       ).userFromDatabase.then((value) {
         user = value;
+
+        Provider.of<CartProvider>(
+          context,
+          listen: false,
+        ).cartItems(user["uid"]).then((value) {
+          cart = value;
+          for (var c = 0; c < cart.length; c++) {
+            cantityInCart += cart[c]["cantity"] as int;
+          }
+          setState(() {
+            _isLoading = false;
+          });
+        });
+
         setState(() {
           _isLoading = false;
         });
@@ -45,53 +60,39 @@ class _CartWidgetState extends State<CartWidget> {
               color: Colors.yellowAccent,
             ),
           )
-        : Consumer<CartProvider>(builder: (context, cartProvider, _) {
-            print("cart: ${cartProvider.count(user["uid"])}");
-
-            Widget test = Container();
-
-            return FutureBuilder<int>(
-                future: cartProvider.count(user["uid"]),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    return Text("Loading data...");
-                  }
-                  print("cart: ${snapshot}");
-                  return GestureDetector(
-                    onTap: () => Navigator.of(context)
-                        .pushNamed(ListarReciclajesPage.routeName),
+        : GestureDetector(
+            onTap: () =>
+                Navigator.of(context).pushNamed(ListarReciclajesPage.routeName),
+            child: Container(
+              width: 55,
+              height: 55,
+              alignment: Alignment.center,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    "Assets/Images/Caja.png",
+                    width: 45,
+                  ),
+                  Positioned(
+                    right: 1,
+                    top: 1,
                     child: Container(
-                      width: 55,
-                      height: 55,
                       alignment: Alignment.center,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          Image.asset(
-                            "Assets/Images/Caja.png",
-                            width: 45,
-                          ),
-                          Positioned(
-                            right: 1,
-                            top: 1,
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.all(5),
-                              child: Text(
-                                "${snapshot.data}",
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.purpleAccent,
-                              ),
-                            ),
-                          ),
-                        ],
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        "${cantityInCart}",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.purpleAccent,
                       ),
                     ),
-                  );
-                });
-          });
+                  ),
+                ],
+              ),
+            ),
+          );
   }
 }
