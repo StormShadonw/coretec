@@ -17,6 +17,10 @@ DatabaseReference saveItemCart(
   return id;
 }
 
+void deleteItemCart(String id) {
+  databaseReference.child("cartItems/").child(id).remove();
+}
+
 Future<List<MapEntry<String, dynamic>>> getItemsCart(String uid) async {
   var user = await databaseReference.child("cartItems/").once();
   // var userToReturn;

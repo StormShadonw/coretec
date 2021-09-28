@@ -2,6 +2,7 @@ import 'package:coretec/Providers/AuthProvider.dart';
 import 'package:coretec/Providers/CartProvider.dart';
 import 'package:coretec/Widgets/CartItem.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class ListarReciclajesPage extends StatefulWidget {
@@ -46,24 +47,37 @@ class _ListarReciclajesPageState extends State<ListarReciclajesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: TextButton(onPressed: () {}, child: Text("CONTINUAR")),
+      ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Lista de Reciclaje"),
       ),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : Container(
-              padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ...carts.map((e) => CartItemWidget(cartItem: e)).toList()
-                  ],
+          : carts.length == 0
+              ? Container(
+                  child: Center(
+                    child: SvgPicture.asset(""),
+                  ),
+                )
+              : Container(
+                  padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
+                  alignment: Alignment.center,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ...carts
+                            .map((e) => CartItemWidget(cartItem: e))
+                            .toList()
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
     );
   }
 }

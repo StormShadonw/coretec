@@ -1,4 +1,5 @@
 import 'package:coretec/Helpers/database.dart';
+import 'package:coretec/Pages/ListarReciclajesPage.dart';
 import 'package:coretec/Providers/CartProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -192,7 +193,12 @@ class _CartItemWidgetState extends State<CartItemWidget> {
           ),
           Container(
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                deleteItemCart(widget.cartItem["id"]);
+                // Navigator.pop(context);
+                Navigator.pop(context);
+                Navigator.pushNamed(context, ListarReciclajesPage.routeName);
+              },
               child: Text(
                 "Eliminar",
                 style: TextStyle(
